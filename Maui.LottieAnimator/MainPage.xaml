@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Maui.LottieAnimator.Controls"
+             x:Class="Maui.LottieAnimator.MainPage">
+
+    <ContentPage.Resources>
+        <Style x:Key="IconButtonStyle" TargetType="Button">
+            <Setter Property="HeightRequest" Value="48"/>
+            <Setter Property="CornerRadius" Value="24"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BackgroundColor" Value="#f0f0f0"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Padding="20" Spacing="16">
+
+        <controls:LottiePlayerView x:Name="LottiePlayer" HeightRequest="300" WidthRequest="300"/>
+
+        <Grid ColumnDefinitions="*,*">
+            <Label x:Name="CurrentTimeLabel" Text="00:00" HorizontalOptions="Start"/>
+            <Label x:Name="TotalTimeLabel" Text="00:00" HorizontalOptions="End" Grid.Column="1"/>
+        </Grid>
+        <Slider x:Name="ProgressSlider"
+                Minimum="0"
+                Maximum="1"
+                ValueChanged="ProgressSlider_ValueChanged"/>
+
+        <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="8">
+            <Button Grid.Column="0"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="⏮"
+                    Clicked="PreviousFrame_Clicked"
+                    Pressed="PreviousFrame_Pressed"
+                    Released="FrameStep_Released"/>
+
+            <Button Grid.Column="1"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="▶"
+                    Clicked="Play_Clicked"/>
+
+            <Button Grid.Column="2"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="⏸"
+                    Clicked="Pause_Clicked"/>
+
+            <Button Grid.Column="3"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="■"
+                    Clicked="Stop_Clicked"/>
+
+            <Button Grid.Column="4"
+                    x:Name="LoopButton"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="⟳"
+                    Clicked="Loop_Clicked"/>
+
+            <Button Grid.Column="5"
+                    x:Name="SpeedButton"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="1x"
+                    Clicked="SpeedButton_Clicked"/>
+
+            <Button Grid.Column="6"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="⏭"
+                    Clicked="NextFrame_Clicked"
+                    Pressed="NextFrame_Pressed"
+                    Released="FrameStep_Released"/>
+        </Grid>
+
+        <Picker x:Name="AnimationPicker" Title="Select Animation" SelectedIndexChanged="AnimationPicker_SelectedIndexChanged"/>
+    </VerticalStackLayout>
+</ContentPage>
